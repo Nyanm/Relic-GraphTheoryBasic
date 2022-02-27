@@ -1,0 +1,9 @@
+KRUSKAL(Graph,head,tail)
+    for each edge in G.E
+        MAKE-LIST(edge-list)
+    sort edge in edge-list by weight
+    for each edge in edge-list
+        if !CON-CHECK(edge.u, edge.v)
+            UNION(edge.u, edge.v)
+            if UNION(head, tail)
+                return edge.weight

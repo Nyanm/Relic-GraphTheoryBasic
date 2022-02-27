@@ -1,0 +1,18 @@
+MESS-DP(cap, score, prob)
+
+    make each value in array score as (1 - value)
+    make cap as (1 - cap)
+
+    num = score.length
+    score_sum = score.sum
+    score_max = score.max
+    memo = [1] + [0] * score_sum
+
+    for index from q to num
+        for val from score_sum to score[index]
+            memo[val] = max(memo[val], memo[val - score[index]] * prob[index])
+
+    for index from score_sum to 0
+        if memo[index] >= cap:
+            print(index)
+            BREAK

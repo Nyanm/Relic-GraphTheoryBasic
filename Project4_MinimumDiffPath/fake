@@ -1,0 +1,43 @@
+IS-ACCESS(graph, head, tail)
+    RUN DFS
+        IF head and tail is connected on graph
+            RETURN 1
+        ELSE
+            RETURN 0
+
+SLIM-PATH(edges, head, tail)
+    li = hi = 0
+    // Low index and high index
+    low = high = 0, ans = MAX
+    // Minimum and maximum value and their range
+    radix = number of the nodes
+
+    // Get the primitive forest
+    WHILE !IS-ACCESS(edges[li:hi], head, tail)
+    // Append edges until there is a path between head and tail
+        IF hi >= edges.num
+            RETURN -1
+            // If head and tail can't access at all, return -1 as error code
+        high = edges[hi].value
+        // Refresh the maximum value
+        hi++
+        // Push up the high index, means append another edge
+
+    WHILE 1
+        WHILE IS-ACCESS(edges[li:hi], head, tail)
+        // Delete edges until head and tail no longer accessed
+            low = edges[li].value
+            // Refresh the minimum value
+            li++
+            // Push up the low index, means delete another edge
+        ans = MIN(ans, high - low)
+        // Maintain the lowest range
+        WHILE !IS-ACCESS(edges[li:hi], head, tail)
+        // Append edges until there is a path between head and tail
+        IF hi >= edges.num
+            RETURN ans
+            // If head and tail can't access at all, means we've already checked all edges, time to return the answer
+        high = edges[hi].value
+        // Refresh the maximum value
+        hi++
+        // Push up the high index, means append another edge
